@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Apply;
 use App\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -48,7 +49,31 @@ class EmployeeController extends Controller
     }
 
     public function applyJob($id){
-        echo $id;
+        $check = Apply::where('user_id', Auth::user()->id)
+                ->where('job_id', $id)
+                ->count();
+        if($check == 0){
+            $apply = new Apply();
+            $apply->entry_date = date('Y-m-d');
+            $apply->user_id = Auth::user()->id;
+            $apply->job_id = $id;
+            $apply->save();
+
+            session()->flash('success', 'Job was apply');
+        }else{
+            session()->flash('warning', 'You already applied');
+        }
+
+        return redirect()->back();
+    }
+
+    public function appliedJob(){
+        $jobs = Apply::with(['Job'])
+                ->where('user_id', Auth::user()->id)
+                ->orderBy('id', 'desc')
+                ->get();
+
+        return view('frontend.employee.applied_job', compact('jobs', $jobs));
     }
 
     public function username()

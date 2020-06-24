@@ -10,7 +10,16 @@
     @if(count($jobs) ==0)
     <li class="alert alert-warning col-md-12">No job found</li>
     @endif
-    <!-- {{Auth::user()->role}} -->
+
+    @if (Session::has('success'))
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+
+    @if (Session::has('warning'))
+        <div class="alert alert-warning">{{ Session::get('warning') }}</div>
+    @endif
+
+
     @foreach($jobs as $job)
     <div class="job col-md-12 p-3 mb-3" style="border: 1px solid #ddd;">
 

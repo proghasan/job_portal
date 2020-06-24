@@ -6,13 +6,12 @@
     <div class="row">
         @include('frontend/layouts/company_leftbar')
         <div class="col-md-9" style="border-left: 1px solid #ddd;">
-        <table class="table table-bordered table-sm text-center">
+            <table class="table table-bordered table-sm text-center">
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Entry Date</th>
+                        <th>Apply Date</th>
                         <th>Job title</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,8 +19,7 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{ $job->entry_date }}</td>
-                        <td><a target="_blank" href="{{url('single_job/'.$job->id )}}">{{ $job->title }}</a></td>
-                        <td></td>
+                        <td><a href="{{url('single_job/'.$job->job_id )}}">{{ $job->job->title }}</a></td>
                     </tr>
                     @endforeach
                 </tbody>

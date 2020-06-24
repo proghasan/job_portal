@@ -6,22 +6,29 @@
     <div class="row">
         @include('frontend/layouts/company_leftbar')
         <div class="col-md-9" style="border-left: 1px solid #ddd;">
+        <h4 class="mt-2 mb-4">Applied List</h4>
         <table class="table table-bordered table-sm text-center">
                 <thead>
                     <tr>
                         <th>SL</th>
-                        <th>Entry Date</th>
+                        <th>Applied Date</th>
+                        <th>Applier Name</th>
                         <th>Job title</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($jobs as $key=>$job)
+                    <?php
+                    // echo "<pre>";
+                    // print_r($appliedJob);
+                    ?>
+                    @foreach($appliedJob as $key=>$job)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{ $job->entry_date }}</td>
-                        <td><a target="_blank" href="{{url('single_job/'.$job->id )}}">{{ $job->title }}</a></td>
-                        <td></td>
+                        <td>{{$job->entry_date}}</td>
+                        <td>{{$job->user->name}}</td>
+                        <td> <a href="{{url('single_job/'.$job->job_id)}}">
+                        {{$job->job->title}}
+                        </a></td>
                     </tr>
                     @endforeach
                 </tbody>

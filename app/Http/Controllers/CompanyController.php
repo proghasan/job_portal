@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Apply;
 use App\Company;
+use App\Job;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +13,31 @@ use Illuminate\Support\Facades\Hash;
 class CompanyController extends Controller
 {
     public function index(){
-        return view('frontend.company.dashboard');
+        $jobs = Job::where('active', true)
+                ->where('user_id', Auth::user()->id)
+                ->get();
+
+        return view('frontend.company.dashboard', compact('jobs', $jobs));
         
+    }
+    public function appliedList(){
+
+       // user id
+       // all job id
+       // all applied list using job id
+    
+       $jobs = Job::select("id")
+                ->where('active', true)
+                ->where('user_id', Auth::user()->id)
+                ->get();
+        $appliedJob = Apply::with(['Job', 'User'])
+                    ->whereIn('job_id', $jobs)
+                    ->get();
+        // echo "<pre>";
+        // print_r($appliedJob);
+        // return $appliedJob;
+
+        return view('frontend.company.applied_list', compact('appliedJob', $appliedJob));
     }
 
     public function login(){

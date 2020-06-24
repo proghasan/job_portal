@@ -15,6 +15,7 @@ Route::group(['middleware' => ['EmployeeDoor']], function () {
     Route::get('employee_dashboard', "EmployeeController@index");
     Route::get('employee_logout', "EmployeeController@logout");
     Route::get('apply_job/{id}', "EmployeeController@applyJob");
+    Route::get('applied_job', "EmployeeController@appliedJob");
 
 });
 
@@ -23,6 +24,7 @@ Route::group(['middleware' => ['CompanyDoor']], function () {
     Route::get('company_logout', "CompanyController@logout");
     Route::get('job_post', "JobController@index");
     Route::post('job_post_process', "JobController@jobPost");
+    Route::get('applied_list', "CompanyController@appliedList");
     
 
 });

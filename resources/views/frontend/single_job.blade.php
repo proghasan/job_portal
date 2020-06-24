@@ -7,8 +7,17 @@
     }
 </style>
 <div class="row mt-5 mb-5">
-    <div class="job col-md-8 p-3 mb-3">
 
+    
+    <div class="job col-md-8 p-3 mb-3">
+    @if (Session::has('success'))
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+
+    @if (Session::has('warning'))
+        <div class="alert alert-warning">{{ Session::get('warning') }}</div>
+    @endif
+    
         <h5>Job: {{ $job->title }}</h5>
         <span>Company: {{$job->user->company->name}}</span> <br>
         <span>Location: {{$job->user->company->location}}</span> <br>
