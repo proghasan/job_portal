@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +11,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['EmployeeDoor']], function () {
+    Route::get('employee_dashboard', "EmployeeController@index");
+    Route::get('employee_logout', "EmployeeController@logout");
+
 });
+
+Route::group(['middleware' => ['CompanyDoor']], function () {
+    Route::get('company_dashboard', "CompanyController@index");
+    Route::get('company_logout', "CompanyController@logout");
+
+});
+
+Route::get("employee_login", "EmployeeController@login");
+Route::post("employee_login_process", "EmployeeController@loginProcess");
+Route::post("employee_registration", "EmployeeController@registration");
+// company login
+Route::get("company_login", "CompanyController@login");
+Route::post("company_login_process", "CompanyController@loginProcess");
+Route::post("company_registration", "CompanyController@registration");
