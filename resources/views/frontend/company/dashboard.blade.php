@@ -4,7 +4,7 @@
     <h4 class="text-center mt-5 mb-5">Welcome back <span style="font-weight: bold;">{{ ucfirst(Auth()->user()->name) }}</span></h4>
     <hr>
     <div class="row">
-        @include('frontend/layouts/company_leftbar')
+        @include('frontend/layouts/leftbar')
         <div class="col-md-9" style="border-left: 1px solid #ddd;">
         <table class="table table-bordered table-sm text-center">
                 <thead>

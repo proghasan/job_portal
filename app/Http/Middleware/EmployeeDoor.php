@@ -16,7 +16,10 @@ class EmployeeDoor
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->role == "EMPLOYEE"){
+        if(!Auth::check()){
+            return redirect('employee_login');
+        }
+        elseif(Auth::check() && Auth::user()->role == "EMPLOYEE"){
             return $next($request);    
         }
         
