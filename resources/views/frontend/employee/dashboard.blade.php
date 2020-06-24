@@ -6,7 +6,7 @@
     <div class="row">
         @include('frontend/layouts/leftbar')
         <div class="col-md-9" style="border-left: 1px solid #ddd;">
-            Find Your Perfect Employee
+            Your Dashboard
         </div>
     </div>
 
