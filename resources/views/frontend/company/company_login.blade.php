@@ -54,6 +54,24 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" required>
             </div>
+            <hr>
+            <h4>Company Info: </h4>
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Enter company name" required>
+            </div>
+            <div class="form-group">
+                <label for="company_phone">Company Phone</label>
+                <input type="text" class="form-control" name="company_phone" id="company_phone" placeholder="Enter company phone" required>
+            </div>
+            <div class="form-group">
+                <label for="company_location">Company Location</label>
+                <input type="text" class="form-control" name="company_location" id="company_location" placeholder="Enter company location" required>
+            </div>
+            <div class="form-group">
+                <label for="website">Company Website</label>
+                <input type="text" class="form-control" name="website" id="website" placeholder="Enter company website">
+            </div>
             <button type="submit" class="btn btn-success">Registration</button>
         </form>
         </div>

@@ -20,6 +20,9 @@ Route::group(['middleware' => ['EmployeeDoor']], function () {
 Route::group(['middleware' => ['CompanyDoor']], function () {
     Route::get('company_dashboard', "CompanyController@index");
     Route::get('company_logout', "CompanyController@logout");
+    Route::get('job_post', "JobController@index");
+    Route::post('job_post_process', "JobController@jobPost");
+    
 
 });
 

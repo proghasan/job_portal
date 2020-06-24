@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,13 +34,23 @@ class CompanyController extends Controller
     }
 
     public function registration(Request $request){
-       $user = new User();
-       $user->username = $request->username;
-       $user->name = $request->name;
-       $user->phone = $request->phone;
-       $user->role = "COMPANY";
-       $user->password = Hash::make($request->password);
-       $user->save();
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->role = "COMPANY";
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $lastId = $user->id;
+        // company information
+        $company = new Company();
+        $company->user_id = $lastId;
+        $company->name = $request->company_name;
+        $company->phone = $request->company_phone;
+        $company->location = $request->company_location;
+        $company->website = $request->website;
+        $company->save();
+
 
        $request->session()->flash('success', "Company registration successfully. Please login.");
        return redirect()->back();
