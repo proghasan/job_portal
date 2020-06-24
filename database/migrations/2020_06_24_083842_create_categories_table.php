@@ -1,10 +1,11 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +14,22 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
             $table->string('name');
-            $table->string('phone');
-            $table->string('website')->nullable();
-            $table->string('location')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
+
+        $cat = ['Design/Creative', 'IT & Telecommunication','Electrician/ Construction/ Repair',
+        'Production/Operation','Hospitality/ Travel/ Tourism','Beauty Care/ Health & Fitness'];
+        foreach($cat as $cat){
+            $category = new Category();
+            $category->name = "$cat";
+            $category->save();
+        }
+
+
     }
 
     /**
@@ -32,6 +39,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('categories');
     }
 }

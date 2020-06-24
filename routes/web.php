@@ -14,6 +14,7 @@
 Route::group(['middleware' => ['EmployeeDoor']], function () {
     Route::get('employee_dashboard', "EmployeeController@index");
     Route::get('employee_logout', "EmployeeController@logout");
+    Route::get('apply_job/{id}', "EmployeeController@applyJob");
 
 });
 
@@ -33,3 +34,9 @@ Route::post("employee_registration", "EmployeeController@registration");
 Route::get("company_login", "CompanyController@login");
 Route::post("company_login_process", "CompanyController@loginProcess");
 Route::post("company_registration", "CompanyController@registration");
+
+// show index page
+Route::get("/", "FrontendController@index");
+Route::get("show_job/{id}", "FrontendController@jobs");
+Route::get("single_job/{id}", "FrontendController@showSingleJob");
+

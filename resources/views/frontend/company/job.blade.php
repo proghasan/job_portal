@@ -20,6 +20,16 @@
                 <label for="username">Vacancy</label>
                 <input type="text" class="form-control" name="vacancy" id="vacancy" placeholder="Enter vacancy" required>
             </div>
+
+            <div class="form-group">
+                <label for="username">Category</label>
+                <select name="category" id="category" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->name}}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             
             <div class="form-group">
                 <label for="experience">Experience</label>

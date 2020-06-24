@@ -19,6 +19,7 @@ class CreateJobsTable extends Migration
             $table->date('entry_date');
             $table->string('title');
             $table->string('vacancy');
+            $table->integer('category_id');
             $table->string('experience')->nullable();
             $table->text('description')->nullable();
             $table->text('company_policy')->nullable();

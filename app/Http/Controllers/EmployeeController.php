@@ -47,6 +47,10 @@ class EmployeeController extends Controller
        return redirect()->back();
     }
 
+    public function applyJob($id){
+        echo $id;
+    }
+
     public function username()
     {
         return 'username';
