@@ -10,6 +10,7 @@
         @if(Auth::user()->role == "EMPLOYEE")
             <a class="nav-link" href="{{url('employee_dashboard')}}">Dashboard</a>
             <a class="nav-link" href="{{url('applied_job')}}">Applied Job</a>
+            <a class="nav-link" href="{{url('build_resume')}}">Build Resume/CV</a>
         @endif
     </li>
 </ul>

@@ -16,6 +16,15 @@ Route::group(['middleware' => ['EmployeeDoor']], function () {
     Route::get('employee_logout', "EmployeeController@logout");
     Route::get('apply_job/{id}', "EmployeeController@applyJob");
     Route::get('applied_job', "EmployeeController@appliedJob");
+    Route::get('build_resume', "EmployeeController@buildResume");
+    Route::get('get_user_info', "EmployeeController@getUserInfo");
+    Route::get('get_education_info', "EmployeeController@getEducationInfo");
+    Route::get('get_work_info', "EmployeeController@getWorkInfo");
+    Route::get('get_other_info', "EmployeeController@getBasicInfo");
+    Route::post('save_education_info', "EmployeeController@saveEducationInfo");
+    Route::post('save_work_info', "EmployeeController@saveWorkInfo");
+    Route::post('save_basic_info', "EmployeeController@saveBasicInfo");
+    Route::post('update_user_info', "EmployeeController@UpdateUserInfo");
 
 });
 

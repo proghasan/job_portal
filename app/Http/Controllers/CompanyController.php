@@ -15,6 +15,7 @@ class CompanyController extends Controller
     public function index(){
         $jobs = Job::where('active', true)
                 ->where('user_id', Auth::user()->id)
+                ->orderBy('id', 'desc')
                 ->get();
 
         return view('frontend.company.dashboard', compact('jobs', $jobs));
@@ -32,6 +33,7 @@ class CompanyController extends Controller
                 ->get();
         $appliedJob = Apply::with(['Job', 'User'])
                     ->whereIn('job_id', $jobs)
+                    ->orderBy('id', 'desc')
                     ->get();
         // echo "<pre>";
         // print_r($appliedJob);

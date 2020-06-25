@@ -19,7 +19,7 @@ class CreateWorkExperiencesTable extends Migration
             $table->string('company_name');
             $table->string('designation');
             $table->date('from_date');
-            $table->date('to_date');
+            $table->date('to_date')->nullable();
             $table->boolean('is_present')->comment('running job this company');
             $table->timestamps();
         });
