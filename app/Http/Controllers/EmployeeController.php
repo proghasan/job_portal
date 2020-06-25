@@ -11,6 +11,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
 {
@@ -182,13 +183,27 @@ class EmployeeController extends Controller
     }
 
     public function UpdateUserInfo(Request $request){
+        
+        $request->validate([
+            'image' => 'required|mimes:pdf,xlx,csv,png,jpg,jpeg|max:2048',
+        ]);
+  
+        $fileName = time().'.'.$request->image->extension();  
+   
+        $request->image->move(public_path('uploads'), $fileName);
+
+
         $id = Auth::user()->id;
-        $data= $request->sendData;
+
+        $obj = json_decode($request->input('data'));
+
         $user = User::find($id);
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->phone = $data['phone'];
+        $user->image = $fileName;
+        $user->name = $obj->name;
+        $user->email = $obj->email;
+        $user->phone = $obj->phone;
         $user->save();
+        
         return response()->json("Information updated");
     }
 }

@@ -1,11 +1,53 @@
 @extends('frontend.master')
 @section('title', 'Employee Dashboard ')
 @section('content')
+<style>
+    #employees label{
+		font-size:13px;
+	}
+	#employees select{
+		border-radius: 3px;
+	}
+	#employees .add-button{
+		padding: 2.5px;
+		width: 28px;
+		background-color: #298db4;
+		display:block;
+		text-align: center;
+		color: white;
+	}
+	#employees .add-button:hover{
+		background-color: #41add6;
+		color: white;
+	}
+	#employees input[type="file"] {
+		display: none;
+	}
+	#employees .custom-file-upload {
+		border: 1px solid #ccc;
+		display: inline-block;
+		padding: 5px 12px;
+		cursor: pointer;
+		margin-top: 5px;
+		background-color: #298db4;
+		border: none;
+		color: white;
+	}
+	#employees .custom-file-upload:hover{
+		background-color: #41add6;
+	}
+
+	#employeeImage{
+		height: 100%;
+	}
+
+</style>
+
 <h4 class="text-center mt-5 mb-5">Welcome back <span style="font-weight: bold;">{{ ucfirst(Auth()->user()->name) }}</span></h4>
 <hr>
 <div class="row" id="app">
     @include('frontend/layouts/leftbar')
-    <div class="col-md-9" style="border-left: 1px solid #ddd;">
+    <div class="col-md-9" style="border-left: 1px solid #ddd;" id="employees">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="basic" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Basic</a>
@@ -44,6 +86,19 @@
                         <div class="form-group col-md-6">
                             <label for="phone">Phone</label>
                             <input type="text" v-model="user.phone" class="form-control" name="phone" id="phone" placeholder="Enter Phone" required>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div style="width: 100px;height:100px;border: 1px solid #ccc;overflow:hidden;">
+                                <img id="employeeImage" v-if="imageUrl == '' || imageUrl == null" src="/assets/no_image.gif">
+                                <img id="employeeImage" v-if="imageUrl != '' && imageUrl != null" v-bind:src="imageUrl">
+                            </div>
+                            <div style="">
+                                <label class="custom-file-upload">
+                                    <input type="file" @change="previewImage"/>
+                                    Select Image
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <button class="btn btn-sm btn-success float-right" type="submit">Save</button>
@@ -167,6 +222,9 @@
             },
             totalEducationRows: [],
             totalWorkRows: [],
+            
+            selectedFile: null,
+            imageUrl: null
 
         },
         async created() {
@@ -186,6 +244,17 @@
 
         },
         methods: {
+            previewImage(){
+				if(event.target.files.length > 0){
+					this.selectedFile = event.target.files[0];
+					this.imageUrl = URL.createObjectURL(this.selectedFile);
+				} else {
+					this.selectedFile = null;
+					this.imageUrl = null;
+				}
+			},
+
+
             addMoreEducation() {
                 let education = {
                     id: 0,
@@ -217,6 +286,9 @@
                 await axios.get("/get_user_info").then(res => {
                     let r = res.data;
                     this.user = r;
+
+                    this.imageUrl = "uploads/"+r.image;
+                    console.log(r.image);
                 })
             },
 
@@ -261,7 +333,11 @@
             },
 
             saveUseInfo(){
-                axios.post("/update_user_info", {sendData: this.user}).then(res => {
+                let fd = new FormData();
+				fd.append('image', this.selectedFile);
+				fd.append('data', JSON.stringify(this.user));
+
+                axios.post("/update_user_info", fd).then(res => {
                     alert(res.data);
                 });
             },
