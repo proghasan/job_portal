@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Job;
+use App\User;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -29,5 +30,14 @@ class FrontendController extends Controller
                 ->first();
 
         return view('frontend.single_job', compact('job',$job));
+    }
+
+    public function viewResume($id){
+        $user = User::with(['EmployeeBasicInfo','Education','WorkExperience'])
+                ->where('role', 'EMPLOYEE')
+                ->where('id', $id)
+                ->first();
+
+        return view('frontend.employee.view_resume', compact('user',$user));
     }
 }

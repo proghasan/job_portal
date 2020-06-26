@@ -51,3 +51,6 @@ Route::get("/", "FrontendController@index");
 Route::get("show_job/{id}", "FrontendController@jobs");
 Route::get("single_job/{id}", "FrontendController@showSingleJob");
 
+// resume view
+Route::get("view_resume/{id}", "FrontendController@viewResume");
+

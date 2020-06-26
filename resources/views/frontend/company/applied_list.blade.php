@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$job->entry_date}}</td>
-                        <td>{{$job->user->name}}</td>
+                        <td><a href="{{url('view_resume/'.$job->user->id)}}">{{$job->user->name}}</a></td>
                         <td> <a href="{{url('single_job/'.$job->job_id)}}">
                         {{$job->job->title}}
                         </a></td>

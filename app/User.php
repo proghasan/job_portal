@@ -49,4 +49,15 @@ class User extends Authenticatable
     public function Apply(){
         return $this->hasMany('App\Apply');
     }
+
+    public function EmployeeBasicInfo(){
+        return $this->hasOne('App\EmployeeBasicInfo');
+    }
+
+    public function Education(){
+        return $this->hasMany('App\Education');
+    }
+    public function WorkExperience(){
+        return $this->hasMany('App\WorkExperience');
+    }
 }
