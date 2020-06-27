@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/bootstrap/css/bootstrap.min.css')}}">
 
   <title>@yield('title')</title>
 </head>
@@ -55,8 +55,8 @@
     @yield('content')
   </div>
 
-  <script src="{{asset('bootstrap/js/jquery.min.js')}}"></script>
-  <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('public/bootstrap/js/jquery.min.js')}}"></script>
+  <script src="{{asset('public/bootstrap/js/bootstrap.min.js')}}"></script>
   @yield('custom_script')
 </body>
 

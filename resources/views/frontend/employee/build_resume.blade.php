@@ -198,8 +198,8 @@
 </div>
 @endsection
 @section('custom_script')
-<script src="{{ asset('bootstrap/js/vue.min.js') }}"></script>
-<script src="{{ asset('bootstrap/js/axios.min.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/vue.min.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/axios.min.js') }}"></script>
 <script>
     new Vue({
         el: '#app',

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Education;
+use App\EmployeeBasicInfo;
 use App\Job;
 use App\User;
+use App\WorkExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -33,6 +37,23 @@ class FrontendController extends Controller
     }
 
     public function viewResume($id){
+        $basic = EmployeeBasicInfo::where("user_id", $id)->count();
+        if($basic ==0){
+            echo "This employee basic info  not set";
+            return;
+        }
+        $education = Education::where("user_id", $id)->count();
+        if($education ==0){
+            echo "This employee education info  not set";
+            return;
+        }
+
+        $work = WorkExperience::where("user_id", $id)->count();
+        if($work ==0){
+            echo "This employee work info  not set";
+            return;
+        }
+        
         $user = User::with(['EmployeeBasicInfo','Education','WorkExperience'])
                 ->where('role', 'EMPLOYEE')
                 ->where('id', $id)
